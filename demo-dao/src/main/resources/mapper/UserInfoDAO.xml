@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weirdo.demo.dao.IUserInfoDAO">
+  <resultMap id="userInfoDO" type="com.weirdo.demo.dataobject.UserInfoDO">
+    <!-- WARNING - @mbggenerated -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <sql id="allColumnSQL">
+    <!-- WARNING - @mbggenerated -->
+    id, user_name, age
+  </sql>
+  <select id="getUserInfoByID" parameterType="java.lang.Long" resultMap="userInfoDO">
+    <!-- WARNING - @mbggenerated -->
+    select 
+    <include refid="allColumnSQL" />
+    from userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteUserInfoByID" parameterType="java.lang.Long">
+    <!-- WARNING - @mbggenerated -->
+    delete from userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertUserInfo" keyProperty="id" parameterType="com.weirdo.demo.dataobject.UserInfoDO" useGeneratedKeys="true">
+    <!-- WARNING - @mbggenerated -->
+    insert into userinfo (id, user_name, age
+      )
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertUserInfoSelective" keyProperty="id" parameterType="com.weirdo.demo.dataobject.UserInfoDO" useGeneratedKeys="true">
+    <!-- WARNING - @mbggenerated -->
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateUserInfoByIDSelective" parameterType="com.weirdo.demo.dataobject.UserInfoDO">
+    <!-- WARNING - @mbggenerated -->
+    update userinfo
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateUserInfoByID" parameterType="com.weirdo.demo.dataobject.UserInfoDO">
+    <!-- WARNING - @mbggenerated -->
+    update userinfo
+    set user_name = #{userName,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
