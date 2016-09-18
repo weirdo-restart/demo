@@ -11,11 +11,32 @@
   <name>demo-parent</name>
 
   <properties>
+    <junit.version>4.12</junit.version>
+    <mybatis.version>3.2.2</mybatis.version>
+    <mysql.version>5.1.35</mysql.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
 
+      <!--mybatis -->
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+      </dependency>
+      <!--mysql驱动 -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
